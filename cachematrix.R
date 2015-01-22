@@ -9,16 +9,16 @@
 ## 4. get the value of the inverse of the matrix
 
 
-makeCacheMatrix <- function(input_matrix = matrix()){
-        inversed_matrix <- NULL
+makeCacheMatrix <- function(inputmatrix = matrix()){
+        inversedmatrix <- NULL
         setmatrix <- function(y){
-                input_matrix <<- y
-                inversed_matrix <<- NULL
+                inputmatrix <<- y
+                inversedmatrix <<- NULL
         }
-        getvalue <- function() input_matrix
-        getinverse <- function() inversed_matrix
+        getvalue <- function() inputmatrix
+        getinverse <- function() inversedmatrix
         setinverse <- function(solved){
-                inversed_matrix <<- solved  
+                inversedmatrix <<- solved  
         } 
         list(setmatrix = setmatrix,
              getvalue = getvalue,
@@ -33,16 +33,17 @@ makeCacheMatrix <- function(input_matrix = matrix()){
 ## from the cache and skips the computation. Otherwise, it calculates
 ## the inverse of the matrix via the function solve and sets the value
 ## of the inverse in the cache via the setinverse function.
-
-cacheSolve <- function(input_matrix, ...){
+## for this function, there is the assumption that the supplied matriz
+## is always invertible, so no checked if invertible is implemented.
+cacheSolve <- function(inputmatrix, ...){
         ## Return a matrix that is the inverse of 'x'
-        inversed <- input_matrix$getinverse()
+        inversed <- inputmatrix$getinverse()
         if(!is.null(inversed)){
                 message("getting cached data")
                 return(inversed)
         }
-        temporal_matrix <- input_matrix$getvalue()
-        inversed <- solve(temporal_matrix)
-        input_matrix$setinverse(inversed)
+        temporalmatrix <- inputmatrix$getvalue()
+        inversed <- solve(temporalmatrix)
+        inputmatrix$setinverse(inversed)
         inversed
 }
